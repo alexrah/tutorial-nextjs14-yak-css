@@ -24,12 +24,29 @@ export default function Home() {
         </CrossRefStyled>
 
         <div className='parent-container'>
-          <HeadingLiteral className='solid-variant' $bgColor='grey'>
+
+          <HeadingLiteral $bgColor='#005f6b'>
             HeadingLiteral wrapped in .parent-container
             <span className='child-item'>
-              child here
+              &nbsp; .child-item inside HeadingLiteral
             </span>
           </HeadingLiteral>
+        </div>
+
+        <HeadingLiteral className='shadow-variant' $bgColor='grey'>
+          HeadingLiteral wrapped in .parent-container
+          <span className='child-item'>
+              &nbsp; .child-item inside HeadingLiteral
+            </span>
+        </HeadingLiteral>
+
+
+        <span className='child-item'>
+          .child-item outside HeadingLiteral
+        </span>
+
+        <div className='shadow-variant'>
+          .shadow-variant unrelated to HeadingLiteral
         </div>
 
       </header>
@@ -126,20 +143,26 @@ export default function Home() {
 
 const HeadingLiteral = styled.h2<{$bgColor: string}>`
   background-color: ${({$bgColor}) => $bgColor};
+
   ${CrossRefStyled} & {
     color: purple;
   }
 
-  &.solid-variant {
-  font-weight: bold;
+  &:global(.shadow-variant) {
+    padding: 15px 10px;
+    box-shadow: 5px 5px 10px 0 yellow;
   }
-  
-  & .child-item {
+
+  & :global(.child-item) {
     color: red;
   }
   
+  :global(.parent-container) & {
+    font-size: 30px;
+  }
+
   &:hover {
     font-size: 40px;
   }
-  
+
 `
