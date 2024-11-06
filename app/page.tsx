@@ -1,9 +1,39 @@
 import Image from "next/image";
 import styles from "./page.module.css";
+import {styled} from 'next-yak';
+import {CrossRefComp} from "@/app/CrossRefComp";
+import {CrossRefStyled} from "@/app/CrossRefStyled";
 
 export default function Home() {
   return (
     <div className={styles.page}>
+      <header>
+        <HeadingLiteral $bgColor='blue'>
+          HeadingLiteral
+        </HeadingLiteral>
+        <CrossRefComp>
+          <HeadingLiteral $bgColor='green'>
+            HeadingLiteral wrapped in CrossRefComp
+          </HeadingLiteral>
+        </CrossRefComp>
+
+        <CrossRefStyled>
+          <HeadingLiteral $bgColor='cyan'>
+            HeadingLiteral wrapped in CrossRefStyled
+          </HeadingLiteral>
+        </CrossRefStyled>
+
+        <div className='parent-container'>
+          <HeadingLiteral className='solid-variant' $bgColor='grey'>
+            HeadingLiteral wrapped in .parent-container
+            <span className='child-item'>
+              child here
+            </span>
+          </HeadingLiteral>
+        </div>
+
+      </header>
+
       <main className={styles.main}>
         <Image
           className={styles.logo}
@@ -93,3 +123,23 @@ export default function Home() {
     </div>
   );
 }
+
+const HeadingLiteral = styled.h2<{$bgColor: string}>`
+  background-color: ${({$bgColor}) => $bgColor};
+  ${CrossRefStyled} & {
+    color: purple;
+  }
+
+  &.solid-variant {
+  font-weight: bold;
+  }
+  
+  & .child-item {
+    color: red;
+  }
+  
+  &:hover {
+    font-size: 40px;
+  }
+  
+`

@@ -1,7 +1,5 @@
-import {HTMLAttributes} from "react";
+import {styled} from "next-yak";
 
-export function CrossRefComp(props:HTMLAttributes<HTMLDivElement>){
-  return (
-    <div {...props}></div>
-  )
-}
+export const CrossRefStyled = styled.div`
+  border: 5px solid orange;
+`
