@@ -3,6 +3,7 @@ import styles from "./page.module.css";
 import {styled} from 'next-yak';
 import {CrossRefComp} from "@/app/CrossRefComp";
 import {CrossRefStyled} from "@/app/CrossRefStyled";
+import {CSSProperties, HTMLAttributes, ReactNode} from "react";
 
 export default function Home() {
   return (
@@ -48,6 +49,10 @@ export default function Home() {
         <div className='shadow-variant'>
           .shadow-variant unrelated to HeadingLiteral
         </div>
+
+        <HeadingComponent $textColor='pink'>
+          HeadingComponent
+        </HeadingComponent>
 
       </header>
 
@@ -165,4 +170,8 @@ const HeadingLiteral = styled.h2<{$bgColor: string}>`
     font-size: 40px;
   }
 
+`
+
+const HeadingComponent = styled((props:HTMLAttributes<HTMLHeadingElement>)=>(<h3 {...props}></h3>))<{$textColor:CSSProperties['color']}>`
+  color: ${({$textColor}) => $textColor};
 `
